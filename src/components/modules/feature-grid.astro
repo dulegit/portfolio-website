@@ -1,0 +1,85 @@
+---
+/**
+ * FeatureGrid module.
+ *
+ * Title + optional description + responsive grid of features.
+ * Each feature renders as a Card. Icon is an optional string (slot-friendly
+ * alternative: use the <FeatureGrid> with a named slot per feature — but
+ * for CMS-driven content, props are the right shape).
+ */
+import Container from '@/components/primitives/container.astro';
+import Heading from '@/components/primitives/heading.astro';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/primitives/card';
+import { cn } from '@/lib/utils';
+
+export interface Feature {
+  title: string;
+  description: string;
+  /** Optional emoji or inline SVG string. For Astro Icon integration, render externally and pass raw HTML. */
+  icon?: string;
+}
+
+export interface Props {
+  title?: string;
+  description?: string;
+  features: Feature[];
+  columns?: 2 | 3 | 4;
+  class?: string;
+}
+
+const { title, description, features, columns = 3, class: className } = Astro.props;
+
+const gridCols = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+}[columns];
+---
+
+<section class={cn('py-16 md:py-24', className)}>
+  <Container>
+    {
+      (title || description) && (
+        <div class="mx-auto max-w-2xl text-center mb-12 md:mb-16 space-y-4">
+          {title && (
+            <Heading as="h2" size="2xl">
+              {title}
+            </Heading>
+          )}
+          {description && (
+            <p class="text-lg text-muted-foreground text-balance">{description}</p>
+          )}
+        </div>
+      )
+    }
+
+    <div class={cn('grid gap-6', gridCols)}>
+      {
+        features.map((feature) => (
+          <Card>
+            <CardHeader>
+              {feature.icon && (
+                <div
+                  class="mb-2 inline-flex size-10 items-center justify-center rounded-md bg-secondary text-secondary-foreground text-xl"
+                  aria-hidden="true"
+                  set:html={feature.icon}
+                />
+              )}
+              <CardTitle as="h3">{feature.title}</CardTitle>
+              <CardDescription>{feature.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <slot :name="feature-${feature.title}" />
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+  </Container>
+</section>

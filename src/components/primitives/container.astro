@@ -1,0 +1,41 @@
+---
+/**
+ * Container — layout primitive with consistent max-widths.
+ *
+ * Not part of shadcn/ui (shadcn is component-scoped, not layout-scoped)
+ * but essential for marketing pages. Wraps page sections with the
+ * project's content width.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+export const containerVariants = cva("mx-auto w-full px-4 sm:px-6 lg:px-8", {
+  variants: {
+    size: {
+      sm: "max-w-3xl",
+      default: "max-w-5xl",
+      lg: "max-w-6xl",
+      xl: "max-w-7xl",
+      full: "max-w-none",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+export type ContainerVariantProps = VariantProps<typeof containerVariants>;
+
+export interface Props
+  extends Omit<HTMLAttributes<"div">, "class">, ContainerVariantProps {
+  class?: string;
+  as?: "div" | "section" | "article" | "main" | "header" | "footer";
+}
+
+const { size, class: className, as: Tag = "div", ...rest } = Astro.props;
+---
+
+<Tag class={cn(containerVariants({ size }), className)} {...rest}>
+  <slot />
+</Tag>

@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends Omit<HTMLAttributes<"div">, "class"> {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class={cn("flex items-center px-6", className)} {...rest}>
+  <slot />
+</div>

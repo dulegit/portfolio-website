@@ -1,0 +1,137 @@
+---
+import BaseLayout from "@/layouts/base-layout.astro";
+import Container from "@/components/primitives/container.astro";
+import Heading from "@/components/primitives/heading.astro";
+import Button, { buttonVariants } from "@/components/primitives/button.astro";
+import Input from "@/components/primitives/input.astro";
+import Badge from "@/components/primitives/badge.astro";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/primitives/card";
+import { CTA, FAQ, FeatureGrid, Hero } from "@/components/modules";
+---
+
+<BaseLayout
+  title="Starter"
+  description="Astro starter with shadcn-style primitives"
+>
+  <Container size="lg" class="py-16 space-y-12" as="main">
+    <Hero
+      eyebrow="v0.1.0"
+      title="Ship static sites, fast."
+      description="A minimal Astro starter with shadcn-style primitives, six modules, and local Markdown/MDX content."
+      primaryCta={{ label: "Get started", href: "/docs" }}
+      secondaryCta={{
+        label: "View source",
+        href: "https://github.com",
+        external: true,
+      }}
+    />
+
+    <header class="space-y-4">
+      <Badge variant="secondary">v0.1.0</Badge>
+      <Heading as="h1" size="3xl">A minimal Astro starter</Heading>
+      <p class="text-lg text-muted-foreground text-balance max-w-2xl">
+        Six primitives, shadcn design language, zero client JS by default.
+      </p>
+      <div class="flex gap-3">
+        <Button>Get started</Button>
+        <a href="/docs" class={buttonVariants({ variant: "outline" })}>
+          Read the docs
+        </a>
+      </div>
+    </header>
+
+    <FeatureGrid
+      title="Everything you need, nothing you don't"
+      description="Six primitives, six modules, zero client JS by default."
+      features={[
+        {
+          icon: "⚡",
+          title: "Static-first",
+          description: "Modules render on the server. No hydration cost.",
+        },
+        {
+          icon: "🎨",
+          title: "shadcn tokens",
+          description: "Rebrand a project by editing one CSS file.",
+        },
+        {
+          icon: "📝",
+          title: "CMS-ready",
+          description:
+            "Content lives in /src/content as Markdown/MDX, git-versioned.",
+        },
+      ]}
+    />
+
+    <FAQ
+      title="Frequently asked questions"
+      items={[
+        {
+          question: "Why no UI framework by default?",
+          answer:
+            "Astro components cover most marketing-site needs. Adding Vue or React per-project keeps bundles lean.",
+        },
+        {
+          question: "How do I add shadcn React components?",
+          answer:
+            "<code>pnpm astro add react</code> then <code>npx shadcn@latest init</code>. The token file already matches, so visuals stay consistent.",
+        },
+      ]}
+    />
+
+    <CTA
+      surface="panel"
+      title="Start your next project in minutes"
+      description="Clone the starter, edit tokens, ship."
+      primaryCta={{
+        label: "Clone on GitHub",
+        href: "https://github.com",
+        external: true,
+      }}
+      class="py-8 md:py-12"
+    />
+
+    <section class="py-16 md:py-20">
+      <Container class="grid gap-6 sm:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle as="h3">Static-first</CardTitle>
+            <CardDescription>
+              Every primitive renders on the server. No hydration cost.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Input placeholder="Search primitives…" />
+          </CardContent>
+          <CardFooter class="justify-end">
+            <Button size="sm" variant="ghost">Cancel</Button>
+            <Button size="sm">Save</Button>
+          </CardFooter>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle as="h3">CMS-ready</CardTitle>
+            <CardDescription>
+              Content Collections backed — swap to any CMS by implementing the
+              provider interface.
+            </CardDescription>
+          </CardHeader>
+          <CardContent class="flex flex-wrap gap-2">
+            <Badge>default</Badge>
+            <Badge variant="secondary">secondary</Badge>
+            <Badge variant="outline">outline</Badge>
+            <Badge variant="destructive">destructive</Badge>
+          </CardContent>
+        </Card>
+      </Container>
+    </section>
+  </Container>
+</BaseLayout>

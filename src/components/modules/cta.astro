@@ -1,0 +1,106 @@
+---
+/**
+ * CTA module — a conversion band, usually placed above the footer.
+ *
+ * Two visual variants: plain (follows page bg) and panel (inverted tinted
+ * surface that breaks visual rhythm and draws attention).
+ */
+import { cva, type VariantProps } from "class-variance-authority";
+import Container from "@/components/primitives/container.astro";
+import Heading from "@/components/primitives/heading.astro";
+import { buttonVariants } from "@/components/primitives/button.astro";
+import type { CTALink } from "@/types/modules";
+import { cn } from "@/lib/utils";
+
+const panelVariants = cva("py-16 md:py-20", {
+  variants: {
+    surface: {
+      plain: "",
+      panel: "rounded-2xl bg-primary text-primary-foreground",
+    },
+  },
+  defaultVariants: {
+    surface: "plain",
+  },
+});
+
+export interface Props extends VariantProps<typeof panelVariants> {
+  title: string;
+  description?: string;
+  primaryCta: CTALink;
+  secondaryCta?: CTALink;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  primaryCta,
+  secondaryCta,
+  surface = "plain",
+  class: className,
+} = Astro.props;
+
+// When the panel is inverted, nudge button variants for legibility.
+const primaryVariant =
+  surface === "panel"
+    ? (primaryCta.variant ?? "secondary")
+    : (primaryCta.variant ?? "default");
+const secondaryVariant =
+  surface === "panel" ? "ghost" : (secondaryCta?.variant ?? "outline");
+---
+
+<section class={cn("py-16 md:py-20", className)}>
+  <Container>
+    <div class={cn(panelVariants({ surface }), "px-6 md:px-12")}>
+      <div class="mx-auto max-w-2xl text-center space-y-6">
+        <Heading
+          as="h2"
+          size="2xl"
+          class={surface === "panel" ? "text-primary-foreground" : ""}
+        >
+          {title}
+        </Heading>
+        {
+          description && (
+            <p
+              class={cn(
+                "text-lg text-balance",
+                surface === "panel"
+                  ? "text-primary-foreground/80"
+                  : "text-muted-foreground",
+              )}
+            >
+              {description}
+            </p>
+          )
+        }
+        <div class="flex flex-wrap justify-center gap-3">
+          <a
+            href={primaryCta.href}
+            class={buttonVariants({ variant: primaryVariant, size: "lg" })}
+            target={primaryCta.external ? "_blank" : undefined}
+            rel={primaryCta.external ? "noopener noreferrer" : undefined}
+          >
+            {primaryCta.label}
+          </a>
+          {
+            secondaryCta && (
+              <a
+                href={secondaryCta.href}
+                class={buttonVariants({
+                  variant: secondaryVariant,
+                  size: "lg",
+                })}
+                target={secondaryCta.external ? "_blank" : undefined}
+                rel={secondaryCta.external ? "noopener noreferrer" : undefined}
+              >
+                {secondaryCta.label}
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
