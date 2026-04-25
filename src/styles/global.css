@@ -3,80 +3,64 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens (shadcn/ui v4 convention, OKLCH color space).
+ * Design tokens — dark portfolio palette (Portfolio.html handoff).
  *
- * Edit these per project. Everything downstream — primitives, modules,
- * custom components — reads from these variables via Tailwind classes
- * (bg-primary, text-muted-foreground, rounded-md, etc.)
+ * Raw design tokens defined first, then aliased to shadcn/ui v4 names so
+ * existing primitives (bg-primary, text-muted-foreground, rounded-md, etc.)
+ * keep working without changes.
  *
- * This is the ONLY file you should touch to rebrand a project.
+ * This is the ONLY file you should touch to rebrand the project.
  */
 :root {
-  /* Surfaces */
-  --background: oklch(0.98 0.003 250);          /* cool off-white */
-  --foreground: oklch(0.18 0.055 255);           /* deep navy text */
+  /* Raw design tokens */
+  --bg: #110e1b;
+  --bg-elev: #191528;
+  --bg-card: #1a1526;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.055 255);
+  --wine-1: #3c162f;
+  --wine-2: #5c162e;
+  --wine-3: #7c162e;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.055 255);
+  --line: #2a2438;
+  --line-soft: #1f1a2c;
 
-  /* Brand — Navy primary, Teal secondary */
-  --primary: oklch(0.27 0.085 255);             /* deep navy */
-  --primary-foreground: oklch(0.97 0.003 250);
+  --text: #e8e4ef;
+  --text-mute: #9a93aa;
+  --text-dim: #6a6479;
+  --text-soft: #cfc8dc;
 
-  --secondary: oklch(0.93 0.04 190);            /* light teal wash */
-  --secondary-foreground: oklch(0.27 0.07 210);
+  --amber: #c9a46a;
 
-  /* Utility */
-  --muted: oklch(0.95 0.005 250);               /* neutral cool gray */
-  --muted-foreground: oklch(0.52 0.012 250);
+  /* shadcn/ui v4 token aliases */
+  --background: var(--bg);
+  --foreground: var(--text);
 
-  --accent: oklch(0.55 0.23 248);               /* electric blue */
-  --accent-foreground: oklch(0.98 0 0);
+  --card: var(--bg-card);
+  --card-foreground: var(--text);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
+  --popover: var(--bg-elev);
+  --popover-foreground: var(--text);
 
-  /* Form & focus */
-  --border: oklch(0.88 0.008 250);              /* cool gray border */
-  --input: oklch(0.88 0.008 250);
-  --ring: oklch(0.55 0.23 248);                 /* electric blue focus ring */
+  --primary: var(--wine-3);
+  --primary-foreground: var(--text);
 
-  /* Radius */
-  --radius: 0.625rem;
-}
+  --secondary: var(--bg-elev);
+  --secondary-foreground: var(--text-mute);
 
-.dark {
-  /* Deep navy background, electric blue primary */
-  --background: oklch(0.15 0.045 258);          /* deep navy */
-  --foreground: oklch(0.95 0.006 250);
+  --muted: var(--bg-elev);
+  --muted-foreground: var(--text-mute);
 
-  --card: oklch(0.21 0.05 258);                 /* slightly lighter navy */
-  --card-foreground: oklch(0.95 0.006 250);
-
-  --popover: oklch(0.21 0.05 258);
-  --popover-foreground: oklch(0.95 0.006 250);
-
-  --primary: oklch(0.63 0.22 248);              /* electric blue — pops on dark */
-  --primary-foreground: oklch(0.15 0.045 258);
-
-  --secondary: oklch(0.28 0.055 195);           /* dark teal */
-  --secondary-foreground: oklch(0.91 0.04 190);
-
-  --muted: oklch(0.26 0.04 258);               /* dark navy-gray */
-  --muted-foreground: oklch(0.65 0.012 250);
-
-  --accent: oklch(0.58 0.15 185);              /* teal accent */
-  --accent-foreground: oklch(0.97 0 0);
+  --accent: #a3576a;
+  --accent-foreground: var(--text);
 
   --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.63 0.22 248);                /* electric blue focus ring */
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--wine-3);
+
+  --radius: 0.125rem;
 }
 
 /*
@@ -112,10 +96,22 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Design-specific extras exposed as Tailwind utilities */
+  --color-bg-elev: var(--bg-elev);
+  --color-wine-1: var(--wine-1);
+  --color-wine-2: var(--wine-2);
+  --color-wine-3: var(--wine-3);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-text-mute: var(--text-mute);
+  --color-text-dim: var(--text-dim);
+  --color-text-soft: var(--text-soft);
+  --color-amber: var(--amber);
+
+  --radius-sm: calc(var(--radius) - 1px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
 }
 
 @layer base {
@@ -128,6 +124,12 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  ::selection {
+    background: var(--wine-2);
+    color: #fff;
   }
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;

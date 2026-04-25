@@ -22,13 +22,19 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Roboto Slab',
       cssVariable: '--font-serif',
-      weights: [400, 600],
+      weights: [300, 400, 500, 600, 700],
     },
     {
       provider: fontProviders.google(),
       name: 'Nunito',
       cssVariable: '--font-sans',
-      weights: [400, 600],
+      weights: [300, 400, 500, 600, 700],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'JetBrains Mono',
+      cssVariable: '--font-mono',
+      weights: [400, 500],
     },
   ],
 });
