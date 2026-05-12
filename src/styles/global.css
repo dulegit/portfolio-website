@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:is(.dark *));
-
 /*
  * Design tokens — Figma design system (Portfolio – Dusan Andrejevic).
  *

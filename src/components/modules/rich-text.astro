@@ -26,17 +26,10 @@ const proseSize = {
 ---
 
 <Container size="sm" as="article" class="py-12 md:py-16">
-  {
-    /*
-     * `prose-headings:scroll-mt-24` gives sticky-header friendly anchor offsets.
-     * `dark:prose-invert` flips colors under .dark root.
-     * Additional tweaks keep Tailwind typography aligned with our token system.
-     */
-  }
   <div
     class={cn(
       proseSize,
-      'dark:prose-invert max-w-none',
+      'max-w-none',
       'prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight',
       'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
       'prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:content-none prose-code:after:content-none',
