@@ -26,13 +26,22 @@ const { name, title, location, description, class: className } = Astro.props;
       </div>
 
       <div class="flex flex-col gap-8 md:gap-12 max-w-2xl">
-        <h1
-          class="font-sans font-black text-4xl lg:text-5xl leading-[1.28]"
-          style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
-        >
-          <span class="text-brown-200">{name}</span><br />
-          <span class="text-foreground">{title}</span>
-        </h1>
+        <div class="relative">
+          <div
+            class="pointer-events-none absolute -top-48 -left-14 size-[520px] blur-2xl opacity-50"
+            aria-hidden="true"
+            style="background: radial-gradient(ellipse at center, rgba(169,77,55,0.55) 16%, rgba(85,39,28,0.275) 50%, transparent 83%)"
+          >
+          </div>
+          <h1
+            class="relative font-sans font-black text-4xl lg:text-5xl leading-[1.28]"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            <span class="text-brown-200">{name}</span>
+            <br />
+            <span class="text-foreground">{title}</span>
+          </h1>
+        </div>
 
         <p
           class="font-sans text-[1.1875rem] leading-[1.44] text-foreground"
