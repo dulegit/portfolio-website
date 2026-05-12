@@ -20,15 +20,9 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Roboto Slab',
-      cssVariable: '--font-serif',
-      weights: [300, 400, 500, 600, 700],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Nunito',
+      name: 'Nunito Sans',
       cssVariable: '--font-sans',
-      weights: [300, 400, 500, 600, 700],
+      weights: [300, 400, 500, 600, 700, 900],
     },
     {
       provider: fontProviders.google(),

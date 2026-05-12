@@ -3,7 +3,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens — dark portfolio palette (Portfolio.html handoff).
+ * Design tokens — Figma design system (Portfolio – Dusan Andrejevic).
  *
  * Raw design tokens defined first, then aliased to shadcn/ui v4 names so
  * existing primitives (bg-primary, text-muted-foreground, rounded-md, etc.)
@@ -13,52 +13,45 @@
  */
 :root {
   /* Raw design tokens */
-  --bg: #110e1b;
-  --bg-elev: #191528;
-  --bg-card: #1a1526;
+  --blue-50: #eceff2;
+  --blue-200: #a6b3c5;
+  --blue-700: #2b405b;
+  --blue-900: #1a2636;
 
-  --wine-1: #3c162f;
-  --wine-2: #5c162e;
-  --wine-3: #7c162e;
+  --brown-200: #f7bbad;
+  --brown-500: #ee6c4d;
 
-  --line: #2a2438;
-  --line-soft: #1f1a2c;
-
-  --text: #e8e4ef;
-  --text-mute: #9a93aa;
-  --text-dim: #6a6479;
-  --text-soft: #cfc8dc;
-
-  --amber: #c9a46a;
+  /* No serif in design — alias to sans */
+  --font-serif: var(--font-sans);
 
   /* shadcn/ui v4 token aliases */
-  --background: var(--bg);
-  --foreground: var(--text);
+  --background: var(--blue-900);
+  --foreground: var(--blue-50);
 
-  --card: var(--bg-card);
-  --card-foreground: var(--text);
+  --card: var(--blue-900);
+  --card-foreground: var(--blue-50);
 
-  --popover: var(--bg-elev);
-  --popover-foreground: var(--text);
+  --popover: var(--blue-700);
+  --popover-foreground: var(--blue-50);
 
-  --primary: var(--wine-3);
-  --primary-foreground: var(--text);
+  --primary: var(--brown-500);
+  --primary-foreground: var(--blue-50);
 
-  --secondary: var(--bg-elev);
-  --secondary-foreground: var(--text-mute);
+  --secondary: var(--blue-700);
+  --secondary-foreground: var(--brown-200);
 
-  --muted: var(--bg-elev);
-  --muted-foreground: var(--text-mute);
+  --muted: var(--blue-700);
+  --muted-foreground: var(--blue-200);
 
-  --accent: #a3576a;
-  --accent-foreground: var(--text);
+  --accent: var(--brown-200);
+  --accent-foreground: var(--blue-900);
 
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: #ffffff;
 
-  --border: var(--line);
-  --input: var(--line);
-  --ring: var(--wine-3);
+  --border: var(--brown-500);
+  --input: var(--blue-700);
+  --ring: var(--brown-500);
 
   --radius: 0.125rem;
 }
@@ -97,16 +90,12 @@
   --color-ring: var(--ring);
 
   /* Design-specific extras exposed as Tailwind utilities */
-  --color-bg-elev: var(--bg-elev);
-  --color-wine-1: var(--wine-1);
-  --color-wine-2: var(--wine-2);
-  --color-wine-3: var(--wine-3);
-  --color-line: var(--line);
-  --color-line-soft: var(--line-soft);
-  --color-text-mute: var(--text-mute);
-  --color-text-dim: var(--text-dim);
-  --color-text-soft: var(--text-soft);
-  --color-amber: var(--amber);
+  --color-blue-50: var(--blue-50);
+  --color-blue-200: var(--blue-200);
+  --color-blue-700: var(--blue-700);
+  --color-blue-900: var(--blue-900);
+  --color-brown-200: var(--brown-200);
+  --color-brown-500: var(--brown-500);
 
   --radius-sm: calc(var(--radius) - 1px);
   --radius-md: var(--radius);
@@ -128,8 +117,8 @@
     line-height: 1.65;
   }
   ::selection {
-    background: var(--wine-2);
-    color: #fff;
+    background: var(--brown-500);
+    color: var(--blue-50);
   }
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;
