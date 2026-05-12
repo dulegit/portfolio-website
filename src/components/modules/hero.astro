@@ -1,118 +1,46 @@
 ---
-/**
- * Hero module.
- *
- * Composition of primitives: Container + Heading + Button(variants).
- * Accepts eyebrow/title/description + up to two CTAs + optional image.
- *
- * Map a CMS page field like `hero: { title, description, ctas[] }` into
- * these props in the page frontmatter. Keeps the module CMS-agnostic.
- */
-import { cva, type VariantProps } from 'class-variance-authority';
-import Container from '@/components/primitives/container.astro';
-import Heading from '@/components/primitives/heading.astro';
-import Badge from '@/components/primitives/badge.astro';
-import { buttonVariants } from '@/components/primitives/button.astro';
-import type { CMSImage } from '@/types/cms';
-import type { CTALink } from '@/types/modules';
-import { cn } from '@/lib/utils';
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
 
-const wrapperVariants = cva('py-16 md:py-24', {
-  variants: {
-    align: {
-      center: 'text-center',
-      left: 'text-left',
-    },
-  },
-  defaultVariants: {
-    align: 'center',
-  },
-});
-
-export interface Props extends VariantProps<typeof wrapperVariants> {
-  eyebrow?: string;
+export interface Props {
+  name: string;
   title: string;
-  description?: string;
-  primaryCta?: CTALink;
-  secondaryCta?: CTALink;
-  image?: CMSImage;
+  location: string;
+  description: string;
   class?: string;
 }
 
-const {
-  eyebrow,
-  title,
-  description,
-  primaryCta,
-  secondaryCta,
-  image,
-  align = 'center',
-  class: className,
-} = Astro.props;
-
-const contentAlignment =
-  align === 'center' ? 'mx-auto max-w-3xl items-center' : 'max-w-3xl items-start';
-const ctaAlignment = align === 'center' ? 'justify-center' : 'justify-start';
+const { name, title, location, description, class: className } = Astro.props;
 ---
 
-<section class={cn(wrapperVariants({ align }), className)}>
+<section class={cn("py-16 md:py-24 lg:py-32", className)}>
   <Container>
-    <div class={cn('flex flex-col gap-6', contentAlignment)}>
-      {eyebrow && <Badge variant="secondary">{eyebrow}</Badge>}
+    <div class="flex flex-col gap-8 md:gap-12">
+      <div class="flex items-center gap-4">
+        <span class="h-px w-14 shrink-0 bg-primary" aria-hidden="true"></span>
+        <p
+          class="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground"
+        >
+          {title} · {location}
+        </p>
+      </div>
 
-      <Heading as="h1" size="3xl">{title}</Heading>
+      <div class="flex flex-col gap-8 md:gap-12 max-w-2xl">
+        <h1
+          class="font-sans font-black text-4xl lg:text-5xl leading-[1.28]"
+          style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+        >
+          <span class="text-brown-200">{name}</span><br />
+          <span class="text-foreground">{title}</span>
+        </h1>
 
-      {
-        description && (
-          <p class="text-lg md:text-xl text-muted-foreground text-balance max-w-2xl">
-            {description}
-          </p>
-        )
-      }
-
-      {
-        (primaryCta || secondaryCta) && (
-          <div class={cn('flex flex-wrap gap-3 mt-2', ctaAlignment)}>
-            {primaryCta && (
-              <a
-                href={primaryCta.href}
-                class={buttonVariants({ variant: primaryCta.variant ?? 'default', size: 'lg' })}
-                target={primaryCta.external ? '_blank' : undefined}
-                rel={primaryCta.external ? 'noopener noreferrer' : undefined}
-              >
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
-              <a
-                href={secondaryCta.href}
-                class={buttonVariants({ variant: secondaryCta.variant ?? 'outline', size: 'lg' })}
-                target={secondaryCta.external ? '_blank' : undefined}
-                rel={secondaryCta.external ? 'noopener noreferrer' : undefined}
-              >
-                {secondaryCta.label}
-              </a>
-            )}
-          </div>
-        )
-      }
+        <p
+          class="font-sans text-[1.1875rem] leading-[1.44] text-foreground"
+          style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+        >
+          {description}
+        </p>
+      </div>
     </div>
-
-    {
-      image && (
-        <div class="mt-12 md:mt-16">
-          <img
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-            class="w-full rounded-lg border shadow-sm"
-          />
-        </div>
-      )
-    }
   </Container>
 </section>
