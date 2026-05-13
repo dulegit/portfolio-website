@@ -27,9 +27,9 @@ const { steps, links, class: className } = Astro.props;
 <section class={cn("", className)}>
   <Container>
     <!-- Card row: top/bottom border wraps the grid; divide handles internal separators -->
-    <div class="border-t border-b border-border">
+    <div class="border-b md:border-t border-border">
       <div
-        class="flex flex-col divide-y divide-border md:flex-row md:divide-y-0 md:divide-x"
+        class="flex flex-col md:flex-row md:divide-x md:divide-border"
       >
         {
           steps.map(({ num, heading, body }, i) => (

@@ -49,7 +49,7 @@ const { title, description, items, class: className } = Astro.props;
       )
     }
 
-    <div class="divide-y divide-border border-y">
+    <div class="divide-y divide-border border-b md:border-t">
       {
         items.map((item) => (
           <details class="group py-4" open={item.open}>
