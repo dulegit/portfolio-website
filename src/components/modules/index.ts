@@ -7,6 +7,7 @@
  */
 
 export { default as About } from './about.astro';
+export { default as CoreExpertise } from './core-expertise.astro';
 export { default as CTA } from './cta.astro';
 export { default as Header } from './header.astro';
 export { default as FAQ } from './faq.astro';

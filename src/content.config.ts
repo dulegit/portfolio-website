@@ -58,6 +58,23 @@ const aboutSchema = z
   })
   .optional();
 
+const expertiseSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    subtitle: z.string(),
+    cards: z.array(
+      z.object({
+        title: z.string(),
+        index: z.string(),
+        description: z.string(),
+        tags: z.array(z.string()),
+      }),
+    ),
+  })
+  .optional();
+
 const headerSchema = z.object({
   name: z.string(),
   navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
@@ -72,6 +89,7 @@ const pages = defineCollection({
     hero: heroSchema,
     steps: stepsSchema,
     about: aboutSchema,
+    expertise: expertiseSchema,
   }),
 });
 

@@ -1,7 +1,7 @@
 ---
 title: Home
 seo:
-  title: Dusan Andrejevic — Senior Frontend Engineer
+  title: Dusan Andrejevic - Senior Frontend Engineer
   description: Over 7 years delivering Vue.js and TypeScript solutions in enterprise settings, specializing in frontend architecture, micro-frontends, and maintainable code.
 header:
   name: dusan.andrejevic
@@ -66,10 +66,61 @@ about:
       Most of my work is in closed-source production systems, so this site highlights decisions, trade-offs,
       and results rather than screenshots. If you want details on any part reach out, I'm happy to explain the reasoning.
   stats:
-    - value: "6+ yrs"
+    - value: "7+ yrs"
       label: Frontend Engineering
     - value: "Vue 2 → 3"
       label: Migration led
     - value: Production
       label: Systems at scale
+expertise:
+  sectionNum: "02"
+  sectionName: Core Expertise
+  heading: What I work on
+  subtitle: A focused stack, used deliberately. Deep on a few tools rather than shallow on many.
+  cards:
+    - title: Frontend architecture
+      index: /01
+      description: Designing layered module boundaries, domain-driven folder structures, and composition patterns that scale with team size. Keeping state, routing, and side effects predictable as a codebase grows past 100k LOC.
+      tags:
+        - Domain layers
+        - State design
+        - API contracts
+    - title: "Vue.js & TypeScript"
+      index: /02
+      description: Daily-driver stack since 2019. Composition API, Pinia, strict typing across components, stores, and API clients. Comfortable in both Vue 2 legacy surfaces and modern Vue 3 + Vite toolchains.
+      tags:
+        - Vue 3
+        - Composition API
+        - Pinia
+        - Vite
+        - TS strict
+    - title: Micro-frontends
+      index: /03
+      description: Splitting monolithic frontends into independently deployable units with Module Federation. Designing shared contracts, runtime versioning, and integration test strategies that don't collapse under team-level autonomy.
+      tags:
+        - Module Federation
+        - Runtime contracts
+        - Shared libs
+    - title: Testing strategy
+      index: /04
+      description: Pragmatic coverage where the risk lives. Vitest for units and contracts, Testing Library for components, Playwright for the handful of end-to-end flows that genuinely protect revenue. Tests as a design tool, not theater.
+      tags:
+        - Vitest
+        - Testing Library
+        - Playwright
+        - MSW
+    - title: Performance
+      index: /05
+      description: Measuring before optimizing. RUM, Lighthouse CI, bundle-analyzer budgets wired into pull requests. Code-splitting, hydration strategy, image pipelines, and the boring rigor of keeping regressions out of main.
+      tags:
+        - Core Web Vitals
+        - Bundle budgets
+        - SSR / hydration
+    - title: Cross-team collaboration
+      index: /06
+      description: Writing design docs and RFCs that actually get read. Partnering with backend, product, and design on the contracts that sit between us, so shipping feels boring rather than heroic.
+      tags:
+        - RFCs
+        - API co-design
+        - Mentoring
 ---
