@@ -24,11 +24,13 @@ export interface Props {
 const { steps, links, class: className } = Astro.props;
 ---
 
-<section class={cn("py-12 md:py-16", className)}>
+<section class={cn("pb-12 md:pb-24", className)}>
   <Container>
     <!-- Card row: top/bottom border wraps the grid; divide handles internal separators -->
     <div class="border-t border-b border-border">
-      <div class="flex flex-col divide-y divide-border md:flex-row md:divide-y-0 md:divide-x">
+      <div
+        class="flex flex-col divide-y divide-border md:flex-row md:divide-y-0 md:divide-x"
+      >
         {
           steps.map(({ num, heading, body }, i) => (
             <div

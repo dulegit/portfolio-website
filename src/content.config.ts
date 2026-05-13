@@ -47,6 +47,17 @@ const stepsSchema = z
   })
   .optional();
 
+const aboutSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    subtitle: z.string(),
+    paragraphs: z.array(z.string()),
+    stats: z.array(z.object({ value: z.string(), label: z.string() })),
+  })
+  .optional();
+
 const headerSchema = z.object({
   name: z.string(),
   navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
@@ -60,6 +71,7 @@ const pages = defineCollection({
     header: headerSchema,
     hero: heroSchema,
     steps: stepsSchema,
+    about: aboutSchema,
   }),
 });
 
