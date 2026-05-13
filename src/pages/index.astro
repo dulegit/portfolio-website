@@ -5,10 +5,14 @@ import { Hero } from "@/components/modules";
 
 const page = await getEntry("pages", "home");
 if (!page) return Astro.redirect("/404");
-const { hero, seo } = page.data;
+const { seo, header, hero } = page.data;
 ---
 
-<BaseLayout title={seo?.title ?? page.data.title} description={seo?.description}>
+<BaseLayout
+  title={seo?.title ?? page.data.title}
+  description={seo?.description}
+  header={header}
+>
   <main>
     {hero && <Hero {...hero} />}
   </main>

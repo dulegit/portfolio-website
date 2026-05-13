@@ -1,0 +1,141 @@
+---
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  class?: string;
+  name: string;
+  navItems: { num: string; label: string; href: string }[];
+}
+
+const { class: className, name, navItems } = Astro.props;
+---
+
+<header
+  class={cn("sticky top-0 z-50 border-b border-primary bg-blue-900", className)}
+>
+  <Container size="xl" class="py-6">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a
+        href="/"
+        class="flex items-center gap-2 font-mono text-[13px] leading-[1.24] text-foreground transition-opacity hover:opacity-80"
+        aria-label="dusan.andrejevic — home"
+      >
+        <span
+          class="flex size-3 shrink-0 items-center justify-center"
+          aria-hidden="true"
+        >
+          <span class="block size-2 rotate-45 rounded-[1px] bg-primary"></span>
+        </span>
+        {name}
+      </a>
+
+      <!-- Desktop nav -->
+      <nav
+        class="hidden items-center gap-4 md:flex"
+        aria-label="Site navigation"
+      >
+        {
+          navItems.map(({ num, label, href }) => (
+            <a
+              href={href}
+              class="font-mono text-[13px] leading-[1.24] transition-opacity hover:opacity-70"
+            >
+              <>
+                <span class="text-primary">{num} </span>
+                <span class="text-foreground">{label}</span>
+              </>
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Hamburger (mobile only) -->
+      <button
+        id="nav-toggle"
+        type="button"
+        class="flex flex-col items-center justify-center gap-[5px] p-1 md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Toggle navigation"
+      >
+        <span
+          id="ham-top"
+          class="block h-px w-5 bg-foreground transition-all duration-200"
+        ></span>
+        <span
+          id="ham-mid"
+          class="block h-px w-5 bg-foreground transition-all duration-200"
+        ></span>
+        <span
+          id="ham-bot"
+          class="block h-px w-5 bg-foreground transition-all duration-200"
+        ></span>
+      </button>
+    </div>
+  </Container>
+
+  <!-- Mobile nav panel -->
+  <div
+    id="mobile-nav"
+    class="hidden border-t border-primary md:hidden"
+    aria-hidden="true"
+  >
+    <Container size="xl" class="py-4">
+      <nav class="flex flex-col gap-1" aria-label="Mobile site navigation">
+        {
+          navItems.map(({ num, label, href }) => (
+            <a
+              href={href}
+              class="nav-link py-2 font-mono text-[13px] leading-[1.24] transition-opacity hover:opacity-70"
+            >
+              <>
+                <span class="text-primary">{num} </span>
+                <span class="text-foreground">{label}</span>
+              </>
+            </a>
+          ))
+        }
+      </nav>
+    </Container>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById(
+    "nav-toggle",
+  ) as HTMLButtonElement | null;
+  const mobileNav = document.getElementById("mobile-nav");
+  const hamTop = document.getElementById("ham-top");
+  const hamMid = document.getElementById("ham-mid");
+  const hamBot = document.getElementById("ham-bot");
+
+  function openMenu() {
+    toggle?.setAttribute("aria-expanded", "true");
+    mobileNav?.classList.remove("hidden");
+    mobileNav?.setAttribute("aria-hidden", "false");
+    hamTop?.classList.add("translate-y-[6px]", "rotate-45");
+    hamMid?.classList.add("opacity-0");
+    hamBot?.classList.add("-translate-y-[6px]", "-rotate-45");
+  }
+
+  function closeMenu() {
+    toggle?.setAttribute("aria-expanded", "false");
+    mobileNav?.classList.add("hidden");
+    mobileNav?.setAttribute("aria-hidden", "true");
+    hamTop?.classList.remove("translate-y-[6px]", "rotate-45");
+    hamMid?.classList.remove("opacity-0");
+    hamBot?.classList.remove("-translate-y-[6px]", "-rotate-45");
+  }
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  // Close on nav link click (smooth scroll to section)
+  document.querySelectorAll("#mobile-nav .nav-link").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>

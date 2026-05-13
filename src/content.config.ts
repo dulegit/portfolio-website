@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { string } from 'astro:schema';
 
 const imageSchema = z.object({
   src: z.string(),
@@ -27,11 +28,17 @@ const heroSchema = z
   })
   .optional();
 
+const headerSchema = z.object({
+  name: z.string(),
+  navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
+})
+
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
   schema: z.object({
     title: z.string(),
     seo: seoSchema,
+    header: headerSchema,
     hero: heroSchema,
   }),
 });

@@ -1,13 +1,18 @@
 ---
 import "@/styles/global.css";
 import { Font } from "astro:assets";
+import Header from "@/components/modules/header.astro";
 
 export interface Props {
   title: string;
   description?: string;
+  header: {
+    name: string;
+    navItems: { num: string; label: string; href: string }[];
+  };
 }
 
-const { title, description } = Astro.props;
+const { title, description, header } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,6 +28,7 @@ const { title, description } = Astro.props;
     <Font cssVariable="--font-mono" preload />
   </head>
   <body class="font-sans">
+    <Header {...header} />
     <slot />
   </body>
 </html>
