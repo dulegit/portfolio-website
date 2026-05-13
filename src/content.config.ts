@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { string } from 'astro:schema';
 
 const imageSchema = z.object({
   src: z.string(),
@@ -28,6 +27,26 @@ const heroSchema = z
   })
   .optional();
 
+const stepsSchema = z
+  .object({
+    steps: z.array(
+      z.object({
+        num: z.string(),
+        heading: z.string(),
+        body: z.string(),
+      }),
+    ),
+    links: z.array(
+      z.object({
+        label: z.string(),
+        href: z.string(),
+        arrow: z.string(),
+        external: z.boolean().optional(),
+      }),
+    ),
+  })
+  .optional();
+
 const headerSchema = z.object({
   name: z.string(),
   navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
@@ -40,6 +59,7 @@ const pages = defineCollection({
     seo: seoSchema,
     header: headerSchema,
     hero: heroSchema,
+    steps: stepsSchema,
   }),
 });
 
