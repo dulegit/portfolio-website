@@ -7,6 +7,7 @@
  */
 
 export { default as About } from './about.astro';
+export { default as Footer } from './footer.astro';
 export { default as Contact } from './contact.astro';
 export { default as CoreExpertise } from './core-expertise.astro';
 export { default as CTA } from './cta.astro';

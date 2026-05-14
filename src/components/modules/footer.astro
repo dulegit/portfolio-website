@@ -1,0 +1,16 @@
+---
+import Container from "@/components/primitives/container.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-primary">
+  <Container size="xl" class="py-8">
+    <div
+      class="flex flex-col gap-1 font-mono text-[13px] leading-[1.24] text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} Dusan Andrejevic · Belgrade, Serbia</p>
+      <p>English (Professional) · Serbian (Native)</p>
+    </div>
+  </Container>
+</footer>
