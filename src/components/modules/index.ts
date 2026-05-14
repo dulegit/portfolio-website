@@ -15,4 +15,5 @@ export { default as FeatureGrid } from './feature-grid.astro';
 export { default as Hero } from './hero.astro';
 export { default as RichText } from './rich-text.astro';
 export { default as ProfessionalExperience } from './professional-experience.astro';
+export { default as SelectedWork } from './selected-work.astro';
 export { default as Steps } from './steps.astro';
