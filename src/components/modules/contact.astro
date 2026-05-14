@@ -1,0 +1,159 @@
+---
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  sectionNum: string;
+  sectionName: string;
+  heading: string;
+  statusText: string;
+  headlineAccent: string;
+  headlineBase: string;
+  body: string;
+  email: string;
+  linkedin: string;
+  location: string;
+  class?: string;
+}
+
+const {
+  sectionNum,
+  sectionName,
+  heading,
+  statusText,
+  headlineAccent,
+  headlineBase,
+  body,
+  email,
+  linkedin,
+  location,
+  class: className,
+} = Astro.props;
+---
+
+<section id="contact" class={cn("pt-16 pb-16 md:pt-32 md:pb-32", className)}>
+  <Container>
+    <div class="flex flex-col gap-12">
+      <!-- Section label + heading row -->
+      <div
+        class="flex flex-col gap-4 md:grid md:grid-cols-[180px_1fr] md:gap-x-8"
+      >
+        <div class="self-start md:pt-2">
+          <p
+            class="font-mono text-xs font-medium uppercase leading-none tracking-[0.6px]"
+          >
+            <span class="text-primary">{sectionNum}</span>
+            <span class="text-foreground"> {sectionName}</span>
+          </p>
+        </div>
+        <div>
+          <h2
+            class="font-sans font-bold text-[2rem] leading-[1.28] text-foreground md:text-[2.5rem]"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            {heading}
+          </h2>
+        </div>
+      </div>
+
+      <!-- Content block with orange top rule -->
+      <div class="flex flex-col gap-8 border-t border-border pt-8">
+        <!-- Status badge -->
+        <div
+          class="inline-flex self-start items-center gap-2 rounded-full border border-border px-7 py-3"
+        >
+          <span class="relative flex size-2 shrink-0" aria-hidden="true">
+            <span
+              class="absolute inline-flex size-full animate-ping rounded-full bg-brown-200 opacity-75"
+            ></span>
+            <span class="relative inline-flex size-2 rounded-full bg-brown-200"
+            ></span>
+          </span>
+          <p
+            class="font-mono text-xs font-medium uppercase tracking-[0.6px] text-foreground"
+          >
+            {statusText}
+          </p>
+        </div>
+
+        <!-- Headline -->
+        <h3
+          class="font-sans font-bold text-[2rem] leading-[1.28] md:text-[2.5rem]"
+          style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+        >
+          <span class="text-brown-200">{headlineAccent}</span><br />
+          <span class="text-foreground">{headlineBase}</span>
+        </h3>
+
+        <!-- Body -->
+        <p
+          class="max-w-prose font-sans text-[1.1875rem] leading-[1.44] text-foreground"
+          style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+        >
+          {body}
+        </p>
+
+        <!-- Contact info grid -->
+        <div class="border-y border-border">
+          <div
+            class="flex flex-col divide-y divide-border md:flex-row md:divide-x md:divide-y-0"
+          >
+            <div class="flex flex-col gap-2 py-6 md:flex-1 md:pr-6">
+              <p
+                class="font-mono text-[0.6875rem] uppercase leading-none tracking-[1.54px] text-blue-400"
+              >
+                Email
+              </p>
+              <a
+                href={`mailto:${email}`}
+                class="group inline-flex items-center gap-2 font-sans text-base leading-[1.28] text-foreground transition-colors hover:text-brown-200"
+                style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+              >
+                {email}
+                <span
+                  class="text-sm leading-none opacity-60 transition-opacity group-hover:opacity-100"
+                  aria-hidden="true">↗</span
+                >
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-2 py-6 md:flex-1 md:px-6">
+              <p
+                class="font-mono text-[0.6875rem] uppercase leading-none tracking-[1.54px] text-blue-400"
+              >
+                LinkedIn
+              </p>
+              <a
+                href={`https://${linkedin}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-2 font-sans text-base leading-[1.28] text-foreground transition-colors hover:text-brown-200"
+                style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+              >
+                {linkedin}
+                <span
+                  class="text-sm leading-none opacity-60 transition-opacity group-hover:opacity-100"
+                  aria-hidden="true">↗</span
+                >
+              </a>
+            </div>
+
+            <div class="flex flex-col gap-2 py-6 md:flex-1 md:pl-6">
+              <p
+                class="font-mono text-[0.6875rem] uppercase leading-none tracking-[1.54px] text-blue-400"
+              >
+                Location
+              </p>
+              <p
+                class="font-sans text-base leading-[1.28] text-foreground"
+                style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+              >
+                {location}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

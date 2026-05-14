@@ -1,11 +1,11 @@
 ---
 import { getEntry } from "astro:content";
 import BaseLayout from "@/layouts/base-layout.astro";
-import { About, CoreExpertise, Hero, ProfessionalExperience, SelectedWork, Steps } from "@/components/modules";
+import { About, Contact, CoreExpertise, Hero, ProfessionalExperience, SelectedWork, Steps } from "@/components/modules";
 
 const page = await getEntry("pages", "home");
 if (!page) return Astro.redirect("/404");
-const { seo, header, hero, steps, about, expertise, experience, work } = page.data;
+const { seo, header, hero, steps, about, expertise, experience, work, contact } = page.data;
 ---
 
 <BaseLayout
@@ -20,5 +20,6 @@ const { seo, header, hero, steps, about, expertise, experience, work } = page.da
     {expertise && <CoreExpertise {...expertise} />}
     {experience && <ProfessionalExperience {...experience} />}
     {work && <SelectedWork {...work} />}
+    {contact && <Contact {...contact} />}
   </main>
 </BaseLayout>

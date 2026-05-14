@@ -116,6 +116,21 @@ const selectedWorkSchema = z
   })
   .optional();
 
+const contactSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    statusText: z.string(),
+    headlineAccent: z.string(),
+    headlineBase: z.string(),
+    body: z.string(),
+    email: z.string(),
+    linkedin: z.string(),
+    location: z.string(),
+  })
+  .optional();
+
 const headerSchema = z.object({
   name: z.string(),
   navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
@@ -133,6 +148,7 @@ const pages = defineCollection({
     expertise: expertiseSchema,
     experience: experienceSchema,
     work: selectedWorkSchema,
+    contact: contactSchema,
   }),
 });
 
