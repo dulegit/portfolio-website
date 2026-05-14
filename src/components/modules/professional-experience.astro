@@ -1,0 +1,115 @@
+---
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
+
+export interface Bullet {
+  text: string;
+  project?: string;
+}
+
+export interface ExperienceEntry {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  bullets: Bullet[];
+}
+
+export interface Props {
+  sectionNum: string;
+  sectionName: string;
+  heading: string;
+  subtitle: string;
+  entries: ExperienceEntry[];
+  class?: string;
+}
+
+const { sectionNum, sectionName, heading, subtitle, entries, class: className } = Astro.props;
+---
+
+<section id="experience" class={cn("pt-16 md:pt-32", className)}>
+  <Container>
+    <div class="flex flex-col gap-12">
+
+      <!-- Section label + heading (mirrors about.astro / core-expertise.astro layout) -->
+      <div class="flex flex-col gap-4 md:grid md:grid-cols-[180px_1fr] md:gap-x-8">
+        <div class="self-start md:pt-2">
+          <p class="font-mono text-xs font-medium uppercase leading-none tracking-[0.6px]">
+            <span class="text-primary">{sectionNum}</span>
+            <span class="text-foreground"> {sectionName}</span>
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2
+            class="font-sans font-bold text-[2rem] leading-[1.28] text-foreground md:text-[2.5rem]"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            {heading}
+          </h2>
+          <p
+            class="font-sans text-[1.1875rem] leading-[1.44] text-muted-foreground"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            {subtitle}
+          </p>
+        </div>
+      </div>
+
+      <!-- Entries list: border-b wraps the whole list; each entry has border-t -->
+      <div class="border-b border-border">
+        {entries.map(({ role, company, period, description, bullets }) => (
+          <div class="md:border-t border-border">
+            <div class="grid grid-cols-1 gap-6 py-6 md:grid-cols-[180px_1fr] md:gap-x-8 md:py-8">
+
+              <!-- Sidebar: period (always visible) + role label (desktop only, duplicates H3 on mobile) -->
+              <div class="flex flex-row flex-wrap items-center gap-x-3 md:flex-col md:items-start md:gap-y-2 md:pt-1">
+                <p class="font-mono text-xs font-medium uppercase leading-none tracking-[0.6px] text-primary whitespace-nowrap">
+                  {period}
+                </p>
+                <p class="hidden font-mono text-xs font-medium uppercase leading-none tracking-[0.6px] text-foreground md:block">
+                  {role}
+                </p>
+              </div>
+
+              <!-- Content: title, company, description, bullets -->
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <h3
+                    class="font-sans font-semibold text-[1.75rem] leading-[1.28] text-foreground"
+                    style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+                  >
+                    {role}
+                  </h3>
+                  <p class="font-mono text-[0.8125rem] leading-[1.24] text-primary">
+                    {company}
+                  </p>
+                </div>
+                <p
+                  class="font-sans text-base leading-[1.28] text-muted-foreground"
+                  style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+                >
+                  {description}
+                </p>
+                <ul class="flex flex-col gap-2">
+                  {bullets.map(({ text, project }) => (
+                    <li class="flex items-start gap-2.5">
+                      <span
+                        class="mt-[0.6em] block h-px w-2.5 shrink-0 bg-primary"
+                        aria-hidden="true"
+                      />
+                      <p class="font-sans text-base leading-[1.28] text-foreground">
+                        {project && <em>{project}</em>}{text}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </Container>
+</section>

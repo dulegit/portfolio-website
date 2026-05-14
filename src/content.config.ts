@@ -75,6 +75,29 @@ const expertiseSchema = z
   })
   .optional();
 
+const experienceSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    subtitle: z.string(),
+    entries: z.array(
+      z.object({
+        role: z.string(),
+        company: z.string(),
+        period: z.string(),
+        description: z.string(),
+        bullets: z.array(
+          z.object({
+            text: z.string(),
+            project: z.string().optional(),
+          }),
+        ),
+      }),
+    ),
+  })
+  .optional();
+
 const headerSchema = z.object({
   name: z.string(),
   navItems: z.array(z.object({num: z.string(), label: z.string(), href: z.string()}))
@@ -90,6 +113,7 @@ const pages = defineCollection({
     steps: stepsSchema,
     about: aboutSchema,
     expertise: expertiseSchema,
+    experience: experienceSchema,
   }),
 });
 
