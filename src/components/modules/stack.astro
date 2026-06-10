@@ -1,0 +1,82 @@
+---
+import Badge from "@/components/primitives/badge.astro";
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
+
+export interface StackGroup {
+  label: string;
+  tags: string[];
+}
+
+export interface Props {
+  sectionNum: string;
+  sectionName: string;
+  heading: string;
+  subtitle: string;
+  groups: StackGroup[];
+  class?: string;
+}
+
+const {
+  sectionNum,
+  sectionName,
+  heading,
+  subtitle,
+  groups,
+  class: className,
+} = Astro.props;
+---
+
+<section id="stack" class={cn("pt-16 md:pt-32", className)}>
+  <Container>
+    <div class="flex flex-col gap-12">
+      <!-- Section label + heading (mirrors selected-work.astro layout) -->
+      <div
+        class="flex flex-col gap-4 md:grid md:grid-cols-[180px_1fr] md:gap-x-8"
+      >
+        <div class="self-start md:pt-2">
+          <p
+            class="font-mono text-xs font-medium uppercase leading-none tracking-[0.6px]"
+          >
+            <span class="text-primary">{sectionNum}</span>
+            <span class="text-foreground"> {sectionName}</span>
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h2
+            class="font-sans font-bold text-[2rem] leading-[1.28] text-foreground md:text-[2.5rem]"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            {heading}
+          </h2>
+          <p
+            class="font-sans text-[1.1875rem] leading-[1.44] text-muted-foreground"
+            style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+          >
+            {subtitle}
+          </p>
+        </div>
+      </div>
+
+      <!-- Stack groups: each is a row — mono label + wrapped tag badges -->
+      <div class="border-b border-border">
+        {
+          groups.map(({ label, tags }) => (
+            <div class="flex flex-col gap-3 border-t border-border py-6 md:grid md:grid-cols-[180px_1fr] md:gap-x-8">
+              <p class="font-mono text-xs font-medium uppercase leading-none tracking-[0.6px] text-muted-foreground md:pt-1.5">
+                {label}
+              </p>
+              <div class="flex flex-wrap gap-3">
+                {tags.map((tag) => (
+                  <Badge variant="secondary" class="font-mono font-normal py-1">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,50 @@
+---
+import Container from "@/components/primitives/container.astro";
+import { cn } from "@/lib/utils";
+
+export interface Company {
+  name: string;
+  period?: string;
+}
+
+export interface Props {
+  label: string;
+  items: Company[];
+  class?: string;
+}
+
+const { label, items, class: className } = Astro.props;
+---
+
+<section class={cn("pt-16 md:pt-24", className)}>
+  <Container>
+    <div class="flex flex-col gap-6 md:flex-row md:items-baseline md:gap-10">
+      <p
+        class="shrink-0 font-mono text-xs font-medium uppercase leading-none tracking-[0.6px] text-muted-foreground md:pt-1"
+      >
+        {label}
+      </p>
+      <div
+        class="flex flex-col gap-x-8 gap-y-3 md:flex-row md:flex-wrap md:items-baseline"
+      >
+        {
+          items.map(({ name, period }) => (
+            <div class="flex items-baseline gap-2">
+              <span
+                class="font-sans font-semibold text-base leading-none text-foreground"
+                style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+              >
+                {name}
+              </span>
+              {period && (
+                <span class="font-mono text-xs leading-none tracking-[0.4px] text-muted">
+                  {period}
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

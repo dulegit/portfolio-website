@@ -24,6 +24,48 @@ const heroSchema = z
     title: z.string(),
     location: z.string(),
     description: z.string(),
+    stats: z
+      .array(z.object({ value: z.string(), label: z.string() }))
+      .optional(),
+  })
+  .optional();
+
+const companiesSchema = z
+  .object({
+    label: z.string(),
+    items: z.array(
+      z.object({ name: z.string(), period: z.string().optional() }),
+    ),
+  })
+  .optional();
+
+const stackSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    subtitle: z.string(),
+    groups: z.array(
+      z.object({ label: z.string(), tags: z.array(z.string()) }),
+    ),
+  })
+  .optional();
+
+const writingSchema = z
+  .object({
+    sectionNum: z.string(),
+    sectionName: z.string(),
+    heading: z.string(),
+    subtitle: z.string(),
+    entries: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z.string(),
+        href: z.string(),
+        external: z.boolean().optional(),
+      }),
+    ),
   })
   .optional();
 
@@ -143,11 +185,14 @@ const pages = defineCollection({
     seo: seoSchema,
     header: headerSchema,
     hero: heroSchema,
+    companies: companiesSchema,
     steps: stepsSchema,
     about: aboutSchema,
     expertise: expertiseSchema,
+    stack: stackSchema,
     experience: experienceSchema,
     work: selectedWorkSchema,
+    writing: writingSchema,
     contact: contactSchema,
   }),
 });
