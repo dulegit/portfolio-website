@@ -69,77 +69,6 @@ const writingSchema = z
   })
   .optional();
 
-const stepsSchema = z
-  .object({
-    steps: z.array(
-      z.object({
-        num: z.string(),
-        heading: z.string(),
-        body: z.string(),
-      }),
-    ),
-    links: z.array(
-      z.object({
-        label: z.string(),
-        href: z.string(),
-        arrow: z.string(),
-        external: z.boolean().optional(),
-      }),
-    ),
-  })
-  .optional();
-
-const aboutSchema = z
-  .object({
-    sectionNum: z.string(),
-    sectionName: z.string(),
-    heading: z.string(),
-    subtitle: z.string(),
-    paragraphs: z.array(z.string()),
-    stats: z.array(z.object({ value: z.string(), label: z.string() })),
-  })
-  .optional();
-
-const expertiseSchema = z
-  .object({
-    sectionNum: z.string(),
-    sectionName: z.string(),
-    heading: z.string(),
-    subtitle: z.string(),
-    cards: z.array(
-      z.object({
-        title: z.string(),
-        index: z.string(),
-        description: z.string(),
-        tags: z.array(z.string()),
-      }),
-    ),
-  })
-  .optional();
-
-const experienceSchema = z
-  .object({
-    sectionNum: z.string(),
-    sectionName: z.string(),
-    heading: z.string(),
-    subtitle: z.string(),
-    entries: z.array(
-      z.object({
-        role: z.string(),
-        company: z.string(),
-        period: z.string(),
-        description: z.string(),
-        bullets: z.array(
-          z.object({
-            text: z.string(),
-            project: z.string().optional(),
-          }),
-        ),
-      }),
-    ),
-  })
-  .optional();
-
 const selectedWorkSchema = z
   .object({
     sectionNum: z.string(),
@@ -186,11 +115,7 @@ const pages = defineCollection({
     header: headerSchema,
     hero: heroSchema,
     companies: companiesSchema,
-    steps: stepsSchema,
-    about: aboutSchema,
-    expertise: expertiseSchema,
     stack: stackSchema,
-    experience: experienceSchema,
     work: selectedWorkSchema,
     writing: writingSchema,
     contact: contactSchema,
