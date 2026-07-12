@@ -15,7 +15,7 @@ export interface Props {
   sectionName: string;
   heading: string;
   subtitle: string;
-  entries: WritingEntry[];
+  entries?: WritingEntry[];
   class?: string;
 }
 
@@ -27,6 +27,8 @@ const {
   entries,
   class: className,
 } = Astro.props;
+
+const hasEntries = entries && entries.length > 0;
 ---
 
 <section id="writing" class={cn("pt-16 md:pt-32", className)}>
@@ -62,7 +64,7 @@ const {
 
       <!-- Article list: border-b wraps the list; each entry has border-t -->
       <div class="border-b border-border">
-        {
+        {hasEntries ? (
           entries.map(({ title, description, date, href, external }) => (
             <article class="border-t border-border">
               <a
@@ -97,7 +99,29 @@ const {
               </a>
             </article>
           ))
-        }
+        ) : (
+          <article class="border-t border-border">
+            <div class="flex flex-col gap-3 py-6 md:flex-row md:items-baseline md:gap-8 md:py-8">
+              <div class="flex min-w-0 flex-1 flex-col gap-3">
+                <h3
+                  class="font-sans font-semibold text-[1.375rem] leading-[1.28] text-muted-foreground md:text-[1.75rem]"
+                  style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+                >
+                  First post coming soon
+                </h3>
+                <p
+                  class="font-sans text-base leading-[1.28] text-muted-foreground"
+                  style="font-variation-settings: 'YTLC' 500, 'wdth' 100"
+                >
+                  I'm working on my first write-up. Check back shortly.
+                </p>
+              </div>
+              <p class="shrink-0 font-mono text-xs font-medium uppercase leading-none tracking-[0.6px] text-muted-foreground md:w-32 md:text-right">
+                Soon
+              </p>
+            </div>
+          </article>
+        )}
       </div>
     </div>
   </Container>

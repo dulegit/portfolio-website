@@ -57,15 +57,17 @@ const writingSchema = z
     sectionName: z.string(),
     heading: z.string(),
     subtitle: z.string(),
-    entries: z.array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-        date: z.string(),
-        href: z.string(),
-        external: z.boolean().optional(),
-      }),
-    ),
+    entries: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          date: z.string(),
+          href: z.string(),
+          external: z.boolean().optional(),
+        }),
+      )
+      .optional(),
   })
   .optional();
 
